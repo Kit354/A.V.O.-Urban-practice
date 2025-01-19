@@ -41,7 +41,7 @@ async def create_user(db: Annotated[Session, Depends(get_db)], create_new_user: 
                                    firstname=create_new_user.firstname,
                                    lastname=create_new_user.lastname,
                                    age=create_new_user.age,
-                                   slug=slugify(create_new_user.username)))
+                                   slug=create_new_user.username))
     db.commit()
     return {'status_code': status.HTTP_201_CREATED,
             'transaction': 'Successful'}
@@ -51,12 +51,14 @@ async def create_user(db: Annotated[Session, Depends(get_db)], create_new_user: 
 async def update_user(db: Annotated[Session, Depends(get_db)], user_id: int, updates_user: UpdateUser):
     user_update = db.scalar(select(User).where(User.id == user_id))
     if user_update is None:
-        return {'status_code': status.HTTP_200_OK,
-                'transaction': 'User update is successful!'}
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail='There is no user found!')
     db.execute(update(User).where(User.id == user_id).values(firstname=updates_user.username,
                                                              lastname=updates_user.lastname,
                                                              age=updates_user.age))
     db.commit()
+    return {'status_code': status.HTTP_200_OK,
+            'detail': 'User update is successful!'}
 
 
 @router_user.delete('/delete')
@@ -68,4 +70,4 @@ async def delete_user(db: Annotated[Session, Depends(get_db)], user_id: int):
     db.execute(delete(User).where(User.id == user_id))
     db.commit()
     return {'status_code': status.HTTP_200_OK,
-            'transaction': 'User update is successful!'}
+            'transaction': 'User delete is successful!'}

@@ -1,5 +1,5 @@
 from module_17.backend.db import Base
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 
 
@@ -14,5 +14,5 @@ class User(Base):
     tasks = relationship('Task', back_populates='user')
 
 
-from sqlalchemy.schema import CreateTable
-print(CreateTable(User.__table__))
+# from sqlalchemy.schema import CreateTable
+# print(CreateTable(User.__table__))

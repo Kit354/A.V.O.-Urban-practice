@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        {% block title %}<title>Главная страница</title>{% endblock %}
+    {% block style %}
+    <style>
+        button {
+                margin-left: 10px;
+                background-color: #007BFF;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+        }
+        button:hover {
+                      background-color: #0056b3;
+        }
+    </style>
+    {% endblock %}
+</head>
+<body>
+    <header>
+        {% block name %}
+        <h1>Главная страница</h1>
+        {% endblock %}
+
+        {% block roll_shop %}
+        <a href="/home_page">Главная страница</a>
+        <br>
+        <a href="/home_page/roll_sets/">Набор роллов</a>
+        <br>
+        <a href="/home_page/basket/">Корзина</a>
+        {% endblock %}
+    </header>
+
+    <main>
+        {% block roll_sets %}
+        <h1>{{ text_roll_sets_page }}</h1>
+        <ul>
+            {% for text in text_sets %}
+            <li>{{ text }}<button>{{ button_1 }}</button></li>
+            {% endfor %}
+        </ul>
+        <a href="/home_page/">
+        <button >{{ button_2 }}</button>
+        </a>
+        {% endblock %}
+    </main>
+
+    <nav>
+        {% block basket %}
+        <h1>{{ text_basket_page }}</h1>
+        <h3>{{ text }}</h3>
+        <a href="/home_page/roll_sets/">
+        <button>{{ go_page_roll_sets }}</button>
+        </a>
+        {% endblock %}
+    </nav>
+</body>
+</html>

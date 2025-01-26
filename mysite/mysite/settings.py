@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'task2',
-    'task3',
+    # 'task2',
+    # 'task3',
+    'task4',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates/third_task', 'templates/second_task'],
+        'DIRS': ['templates/fourth_task'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
